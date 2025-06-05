@@ -36,8 +36,39 @@ const axios = require('axios');
             return item.tree;
         }
 
+        if (item.collection) {
+            return item.collection;
+        }
+
         return null;
     }).filter(Boolean);
+
+    const localTreeFilterList = yaml.load(fs.readFileSync('./lists/tree-filterlist.yaml', 'utf8')).map((item) => {
+        if (item.tree) {
+            return item.tree;
+        }
+
+        return null;
+    }).filter(Boolean);
+
+    const localStringFilters = {};
+    const possibleFilters = ['symbol', 'symbolStartsWith', 'symbolEndsWith', 'symbolContains', 'name', 'nameStartsWith', 'nameEndsWith', 'nameContains'];
+
+    yaml.load(fs.readFileSync('./lists/token-blocklist.yaml', 'utf8')).map((item) => {
+        for (let i = 0; i < possibleFilters.length; i++) {
+            const filter = possibleFilters[i];
+
+            if (item[filter]) {
+                if (!localStringFilters[filter]) {
+                    localStringFilters[filter] = [];
+                }
+
+                localStringFilters[filter].push(item[filter]);
+
+                break;
+            }
+        }
+    })
 
     const combinedBlocklist = [...new Set([...remoteBlocklist, ...localBlocklist])];
     const combinedNftBlocklist = [...new Set([...remoteNftBlocklist, ...localNftBlocklist])];
@@ -46,12 +77,15 @@ const axios = require('axios');
 
     const filteredBlocklist = combinedBlocklist.filter(url => !nftAllowlistSet.has(url));
     const filteredNftBlocklist = combinedNftBlocklist.filter(mintOrTree => !nftAllowlistSet.has(mintOrTree));
+    const filteredTreeFilterlist = localTreeFilterList.filter(tree => !nftAllowlistSet.has(tree));
 
     const data = {
         'blocklist': filteredBlocklist,
         'nftBlocklist': filteredNftBlocklist,
-        'whitelist': [],
+        'whitelist': localNftAllowlist,
         'fuzzylist': [],
+        'stringFilters': localStringFilters,
+        'treeFilters': filteredTreeFilterlist
     }
 
     const hash = new SHA3(256);
