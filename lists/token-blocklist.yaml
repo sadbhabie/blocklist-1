@@ -1,0 +1,60 @@
+---
+  - symbol: oinv
+  - symbolContains: oinv
+  - symbolContains: bkinv
+  - symbolContains: sray #1
+  - symbolContains: meleanft1
+  - symbolStartsWith: bkinv
+  - symbolEndsWith: nft1
+  - name: sol rorca #1
+  - name: jups.io
+  - nameContains: rorca
+  - nameContains: jupairdrop.com
+  - nameContains: JUPS.io
+  - nameContains: meleadapp.com
+  - nameStartsWith: orca dao
+  - nameEndsWith:  initiative
+  - nameContains: jupevent.com
+  - nameContains: jupcase
+  - nameContains: sagabox
+  - nameContains: jupiter airdrop
+  - nameContains: redeem nft voucher
+  - nameContains: jupjup
+  - nameContains: jups lucky box
+  - nameContains: 🎁 Airdrop
+  - nameContains: Airdrop 🎁
+  - nameContains: bonk drop
+  - nameContains: solgift
+  - nameContains: $wif
+  - nameContains: $jup
+  - nameContains: ethcrate
+  - nameContains: $bome
+  - nameContains: bome drop
+  - nameContains: wif drop
+  - nameContains: 1000$
+  - nameContains: 2000$
+  - nameContains: 3000$
+  - nameContains: 4000$
+  - nameContains: 5000$
+  - nameContains: 6000$
+  - nameContains: 7000$
+  - nameContains: jupclaim
+  - nameContains: bome claim
+  - nameContains: wif claim
+  - nameContains: 8000$
+  - nameContains: 9000$
+  - nameContains: sol for you
+  - nameContains: 3000wif
+  - nameContains: drop box
+  - nameContains: W drop
+  - nameContains: Wormhole drop
+  - nameContains: jup for you
+  - nameContains: $TENSOR
+  - nameContains: $BONK
+  - nameContains: $10953
+  - nameContains: airdrop.pyth.mom
+  - nameContains: jup drop
+  - nameContains: jup finally
+  - nameContains: maneki drop
+  - nameContains: manekidrop
+  - nameContains: $maneki
