@@ -36,6 +36,18 @@ const axios = require('axios');
             return item.tree;
         }
 
+        if (item.collection) {
+            return item.collection;
+        }
+
+        return null;
+    }).filter(Boolean);
+
+    const localTreeFilterList = yaml.load(fs.readFileSync('./lists/tree-filterlist.yaml', 'utf8')).map((item) => {
+        if (item.tree) {
+            return item.tree;
+        }
+
         return null;
     }).filter(Boolean);
 
@@ -65,13 +77,15 @@ const axios = require('axios');
 
     const filteredBlocklist = combinedBlocklist.filter(url => !nftAllowlistSet.has(url));
     const filteredNftBlocklist = combinedNftBlocklist.filter(mintOrTree => !nftAllowlistSet.has(mintOrTree));
+    const filteredTreeFilterlist = localTreeFilterList.filter(tree => !nftAllowlistSet.has(tree));
 
     const data = {
         'blocklist': filteredBlocklist,
         'nftBlocklist': filteredNftBlocklist,
-        'whitelist': [],
+        'whitelist': localNftAllowlist,
         'fuzzylist': [],
         'stringFilters': localStringFilters,
+        'treeFilters': filteredTreeFilterlist
     }
 
     const hash = new SHA3(256);
